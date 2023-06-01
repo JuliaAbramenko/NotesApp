@@ -35,7 +35,7 @@
                         android:hint="Type your title"
                         android:inputType="text"
                         android:textColor="@color/black"
-                        android:textColorHint="@color/black"
+                        android:textColorHint="@color/blue"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
