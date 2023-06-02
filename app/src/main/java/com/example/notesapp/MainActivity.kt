@@ -11,7 +11,7 @@ import com.example.notesapp.viewmodel.NoteViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     lateinit var notesViewModel: NoteViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +26,6 @@ class MainActivity : AppCompatActivity() {
         val noteRepository = NoteRepository(NoteDatabase(this))
         val viewModelProviderFactory = NoteViewModelFactory(application, noteRepository)
         notesViewModel =
-            ViewModelProvider(this, viewModelProviderFactory).get(NoteViewModel::class.java)
+            ViewModelProvider(this, viewModelProviderFactory)[NoteViewModel::class.java]
     }
 }

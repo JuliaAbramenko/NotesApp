@@ -13,6 +13,3 @@ data class Note(
     val noteTitle: String,
     val noteContent: String
 ) : Parcelable // transporting data across intents easily
-{
-
-}

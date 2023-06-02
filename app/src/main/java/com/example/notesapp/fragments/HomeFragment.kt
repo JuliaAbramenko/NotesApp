@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.notesapp.fragments
 
 import android.os.Bundle
@@ -32,7 +34,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment with binding
         _binding = FragmentHomeBinding.inflate(inflater, container,false)
         return binding.root
@@ -59,12 +61,11 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
         }
         activity?.let {
             notesViewModel.getAllNotes().observe(
-                viewLifecycleOwner,
-                {
-                    note -> noteAdapter.differ.submitList(note)
-                    updateUI(note)
-                }
-            )
+                viewLifecycleOwner
+            ) { note ->
+                noteAdapter.differ.submitList(note)
+                updateUI(note)
+            }
         }
     }
 
@@ -79,6 +80,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
         }
     }
 
+    @Deprecated("Deprecated")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         menu.clear()
@@ -104,11 +106,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
     private fun searchNote(query: String?) {
         val searchQuery = "%$query%"
         notesViewModel.searchNotes(searchQuery).observe(
-            this,
-            {
-                list -> noteAdapter.differ.submitList(list)
-            }
-        )
+            this
+        ) { list ->
+            noteAdapter.differ.submitList(list)
+        }
     }
 
     override fun onDestroy() {

@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.notesapp.fragments
 
 import android.app.AlertDialog
@@ -14,8 +16,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.notesapp.MainActivity
 import com.example.notesapp.R
-import com.example.notesapp.adapter.NoteAdapter
-import com.example.notesapp.databinding.FragmentHomeBinding
 import com.example.notesapp.databinding.FragmentUpdateNoteBinding
 import com.example.notesapp.model.Note
 import com.example.notesapp.viewmodel.NoteViewModel
@@ -38,7 +38,7 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentUpdateNoteBinding.inflate(
             inflater,
@@ -59,7 +59,7 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
         // if user updates note, id of note stays the same
         binding.fabDone.setOnClickListener {
             val title = binding.etNoteTitleUpdate.toString().trim()
-            val body = binding.etNoteBodyUpdate.toString().trim()
+            //val body = binding.etNoteBodyUpdate.toString().trim()
 
             if(title.isNotEmpty()) {
                 val note = Note(currentNote.id, currentNote.noteTitle, currentNote.noteContent)
@@ -84,13 +84,14 @@ class UpdateNoteFragment : Fragment(R.layout.fragment_update_note) {
         }.create().show()
     }
 
+    @Deprecated("Deprecated")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
         inflater.inflate(R.menu.update_note_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
 
     }
-
+    @Deprecated("Deprecated")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.menuDelete -> {

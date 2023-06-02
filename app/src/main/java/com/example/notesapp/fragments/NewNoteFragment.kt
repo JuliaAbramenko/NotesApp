@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.notesapp.fragments
 
 import android.os.Bundle
@@ -7,14 +9,11 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.notesapp.MainActivity
 import com.example.notesapp.R
-import com.example.notesapp.adapter.NoteAdapter
-import com.example.notesapp.databinding.FragmentHomeBinding
 import com.example.notesapp.databinding.FragmentNewNoteBinding
 import com.example.notesapp.model.Note
 import com.example.notesapp.viewmodel.NoteViewModel
@@ -24,7 +23,6 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note) {
     private  var _binding : FragmentNewNoteBinding? = null
     private val binding get() = _binding!!
     private lateinit var notesViewModel: NoteViewModel
-    private lateinit var noteAdapter: NoteAdapter
 
     private lateinit var fView: View
 
@@ -36,7 +34,7 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         /// Inflate the layout for this fragment with binding
         _binding = FragmentNewNoteBinding.inflate(inflater, container,false)
         return binding.root
@@ -48,7 +46,7 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note) {
         fView = view
     }
 
-    fun saveNote(view: View) {
+    private fun saveNote(view: View) {
         val noteTitle = binding.etNoteTitle.text.toString().trim()
         val noteBody = binding.etNoteBody.text.toString().trim()
 
@@ -64,12 +62,14 @@ class NewNoteFragment : Fragment(R.layout.fragment_new_note) {
         }
     }
 
+    @Deprecated("Deprecated")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
         inflater.inflate(R.menu.new_note_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    @Deprecated("Deprecated")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.menuSave -> saveNote(fView)
